@@ -13,7 +13,7 @@ a:hover {
   color: #8570a5;
 }
 
-button {
+button, li {
   display: inline-block;
   margin: 5px;
   cursor: pointer;
@@ -26,8 +26,8 @@ button {
   transition: background-color 0.1s;
 }
 
-button:hover {
-  background-color: #FA52F0;
+button:hover, li:hover {
+  background-color: #F6A0FF;
 }
 
 .choices button {
@@ -42,28 +42,27 @@ ol {
   padding-left: 0px;
   max-height: 400px;
   overflow: auto;
+  display: flex;
+  flex-direction: column;
+
 }
 
 li {
   padding: 5px;
   list-style: decimal inside none;
-}
-
-li:nth-child(odd) {
-  background-color: #f3edfc;
+  width: 40%;
 }
 
 .wrapper {
   margin: 100px auto 0 auto;
   max-width: 600px;
 }
+.start {
+  text-align: center;
+}
 
 .hide {
   display: none;
-}
-
-.start {
-  text-align: center;
 }
 
 .scores {
