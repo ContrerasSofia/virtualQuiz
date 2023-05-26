@@ -70,3 +70,20 @@ input[type="text"] {
   top: 10px;
   right: 10px;
 }
+
+#highscores{
+  display: flex;
+  flex-direction: column;
+}
+
+
+#highscores li{
+  display: inline-block;
+  margin: 5px;
+  font-size: 100%;
+  background-color: #ccc;
+  border-radius: 5px;
+  padding: 2px 10px;
+  border: 0;
+  width: 25%;
+}

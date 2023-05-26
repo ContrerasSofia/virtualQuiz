@@ -2,32 +2,9 @@
 var startBtn = document.getElementById('start');
 var timerEl = document.getElementById('time');
 var choicesEl = document.getElementById('choices');
+var submitBtn = document.getElementById('submit');
 var currentQuestionIndex = 0;
 var time = 0;
-
-
-function startQuiz(event) {
- 
-  quizBegin();
-
-    // start timer
-    var timerInterval = setInterval(function() {
-        
-      time--;
-
-      if(time <= 0){
-        clearInterval(timerInterval);
-        if(!(questions.length === currentQuestionIndex)) {
-        // Stops execution of action at set interval
-        quizEnd();
-        }
-        time = 0;
-      }
-      
-    timerEl.textContent = time;
-
-    }, 1000);
-}
 
 function quizBegin() {
     // hide start screen
@@ -93,6 +70,29 @@ function clearQuestions(){
   }
 }
 
+function startQuiz(event) {
+ 
+  quizBegin();
+
+    // start timer
+    var timerInterval = setInterval(function() {
+        
+      time--;
+
+      if(time <= 0){
+        clearInterval(timerInterval);
+        if(!(questions.length === currentQuestionIndex)) {
+        // Stops execution of action at set interval
+        quizEnd();
+        }
+        time = 0;
+      }
+      
+    timerEl.textContent = time;
+
+    }, 1000);
+}
+
 function questionClick(event) {
   buttonEl = event.target;
   var currentQuestion = questions[currentQuestionIndex]; 
@@ -102,9 +102,13 @@ function questionClick(event) {
 
   if(currentQuestion.answer == buttonEl.textContent){
     feedback.textContent = "Correct!";
+    var snd = new Audio("./assets/sfx/correct.wav");
+    snd.play();
   }else{
     feedback.textContent = "Incorrect!";
     time = time - 10;
+    var snd = new Audio("./assets/sfx/incorrect.wav");
+    snd.play();
   }
   
   clearQuestions()
@@ -113,8 +117,37 @@ function questionClick(event) {
   document.getElementById('choices').appendChild(feedback);
 }
 
+function saveHighscore(event) {
+
+  // get value of input box
+  var initialsEl = document.getElementById('initials');
+  var initials = initialsEl.value.trim();
+
+  if(initials){
+
+    var highscores = JSON.parse(localStorage.getItem("highscores")) || [];
+
+    // format new score object for current user
+    var score = document.getElementById('final-score').textContent;
+    var newScore = {
+      score: score,
+      initials: initials.toUpperCase(),
+    };
+
+    // save to localstorage
+    highscores.push(newScore);
+    localStorage.setItem("highscores", JSON.stringify(highscores));
+
+    //redirect to highscores page
+    window.location.href = 'highscores.html';
+  }
+}
+
 // user clicks button to start quizz
 startBtn.addEventListener("click", startQuiz);
 
 // user selects an option
 choicesEl.addEventListener("click", questionClick);
+
+//user selects submit initials 
+submitBtn.addEventListener("click", saveHighscore);
