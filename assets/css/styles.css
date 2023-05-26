@@ -13,7 +13,7 @@ a:hover {
   color: #8570a5;
 }
 
-button, li {
+button {
   display: inline-block;
   margin: 5px;
   cursor: pointer;
@@ -26,7 +26,7 @@ button, li {
   transition: background-color 0.1s;
 }
 
-button:hover, li:hover {
+button:hover {
   background-color: #F6A0FF;
 }
 
@@ -36,21 +36,6 @@ button:hover, li:hover {
 
 input[type="text"] {
   font-size: 100%;
-}
-
-ol {
-  padding-left: 0px;
-  max-height: 400px;
-  overflow: auto;
-  display: flex;
-  flex-direction: column;
-
-}
-
-li {
-  padding: 5px;
-  list-style: decimal inside none;
-  width: 40%;
 }
 
 .wrapper {
